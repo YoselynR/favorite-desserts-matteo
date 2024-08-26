@@ -21,9 +21,15 @@ dessert_listing <- dessert_elements %>%
   rowid_to_column("rank") %>%  # adding a column using the row number as a proxy for the rank
   write_csv("data/iconic_desserts.csv") # save it as csv
 
+# join option
+fav <- fav %>%
+  rename(dessert = Favorite_dessert)
 
+df <- inner_join(fav, dessert_listing, by = "dessert")
+# no matching desserts
+
+# for loop option
 for (i in seq(fav$Favorite_dessert)){
   if (i == length(dessert_listing$dessert))print("yes, iconic!")
   else print("not part of the list")
 }
-
